@@ -74,31 +74,19 @@ def create_thread(request):
 		return HttpResponseRedirect(reverse('index')) 
 
 def reply(request, thread_id):
-	p = get_object_or_404(Thread, pk=thread_id)
-	try:
+	thread = get_object_or_404(Thread, pk=thread_id)
+	if request.method == 'POST':
 		text = request.POST['text']
-		if text and len(text) > 5 or len(text) > 2000:
-			# Check the captcha length
+		if text and len(text) > 5 and len(text) < 2000:
+			# Check captcha
 			a = request.POST['a']
 			b = request.POST['b']
 			value = request.POST['captcha']
 			if int(a) + int(b) == int(value or 0):
-				date = timezone.now()
-				post = Post(thread=p, post_text=text, pub_date=date)
+				date = timezone.now()	
+				post = Post(thread=thread, post_text=text, pub_date=date)
 				post.save()
-				p.thread_count += 1
-				p.save()
-	
-		else:
-			return render(request, 'board/thread.html', {
-                        'thread': p,
-                        'error_message': "Bad reply length",
-                })
+				thread.thread_count += 1
+				thread.save()
 
-	except (KeyError):		
-		return render(request, 'board/thread.html', {
-			'thread': p,
-			'error_message': "Reply can't be empty",
-		})
-	else:
-		return HttpResponseRedirect(reverse('thread', args=(p.id,)))
+	return HttpResponseRedirect(reverse('thread', args=(thread.id,)))
