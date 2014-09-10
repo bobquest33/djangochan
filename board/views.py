@@ -38,7 +38,10 @@ def index(request, page_number=None):
 	a = randint(0,10)
 	b = randint(0,10)
 
-	d = dict(threads=recentthreads, replies=replies, a=a, b=b, threadcount=threadcount, pagenumber=page_number)
+	# Get number of pages
+	pagecount = threadcount / 15
+
+	d = dict(threads=recentthreads, replies=replies, a=a, b=b, threadcount=threadcount, pagenumber=page_number, pagecount=pagecount)
 	d.update(csrf(request))
 	return render_to_response("board/index.html", d)	
 
