@@ -4,6 +4,10 @@ djangochan
 4chan-like Image Board using Django
 
 
+###My Setup
+
+I use nginx to forward connections to gunicorn as well as serve the static files. I monitor gunicorn with supervisord. Using postgresql for the database 
+
 ####To Be Done
 
   - Thread bumping
