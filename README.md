@@ -15,3 +15,4 @@ I use nginx to forward connections to gunicorn as well as serve the static files
   - Improve admin backend so that posts have a link to their thread and threads display posts
   - Redesign entire css/html of the board
   - Images?
+  - Thread pruning
