@@ -18,18 +18,27 @@ def index(request, page_number=None):
 	threadcount = threads.count()
 
 	# Get the most recently created 15 threads
-	recentthreads = threads.order_by('-pub_date')[:15]
+	if page_number:
+		start = int(page_number) * 15
+		# Check if start is less than total threads
+		if start < threadcount:
+			end = start+15 if start+15 < threadcount else threadcount
+			recentthreads = threads.order_by('-pub_date')[start:end]
+		else:
+			recentthreads = threads.order_by('-pub_date')[:15]
+	else:
+		recentthreads = threads.order_by('-pub_date')[:15]
 
 	# Get top 5 comments for each of the last 15 created threads
 	replies = [0 for x in range(recentthreads.count())]	
-	for i in range(0,threads.count()):
+	for i in range(0,recentthreads.count()):
 		replies[i] = Post.objects.order_by('-pub_date').filter(thread=recentthreads[i])[:5]
 		
 	# Generate random numbers for simple captcha
 	a = randint(0,10)
 	b = randint(0,10)
 
-	d = dict(threads=recentthreads, replies=replies, a=a, b=b, threadcount=threadcount)
+	d = dict(threads=recentthreads, replies=replies, a=a, b=b, threadcount=threadcount, pagenumber=page_number)
 	d.update(csrf(request))
 	return render_to_response("board/index.html", d)	
 
