@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load board_extras %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +70,10 @@
 {% endif %}
 <br>
 Pages:
+<a href="/">[ 0 ]</a> 
+{% for i in pagecount|get_range %}
+	<a href="/{{ forloop.counter }}/">[ {{ forloop.counter }} ]</a> 
+{% endfor %}
 <br><br> 
 <i style="font-size:11px;">Total threads: {{ threadcount }}</i>
 <br><br>
