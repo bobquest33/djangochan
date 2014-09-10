@@ -10,7 +10,7 @@ from board.models import Thread, Post
 from random import randint
 
 # Create your views here.
-def index(request):
+def index(request, page_number=None):
 	# Get all threads
 	threads = Thread.objects.all()
 
