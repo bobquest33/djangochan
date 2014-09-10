@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tox Feedback Board | {{ thread.thread_title }}</title>
+<link rel="stylesheet" type="text/css" href="{% static 'board/style.css' %}" />
+</head>
+<body>
+<br>
+<a href="{% url 'index' %}">Back to index</a>
+
+<h1>Tox Feedback Board</h1>
+
+{% if error_message %}<b style="color:red">{{ error_message }}</b>{% endif %}
+
+<br><br><br>
+<h3>Reply to Thread</h3>
+
+<form action="{% url 'reply' thread.id %}" method="post">
+{% csrf_token %}
+	<table>
+	<input type="hidden" name="a" value="{{ a }}">
+	<input type="hidden" name="b" value="{{ b }}">
+	<tr>
+		<td style="background:#424E49;text-align:center"><b style="color:#6FB699">{{ a }} + {{ b }} = ?</b></td>
+		<td><input type="text" name="captcha" siez="20">
+			<input type="submit" value="Reply to Thread"></td>
+	</tr>
+	<tr>
+		<td style="background:#424E49;"><b style="color:#6FB699;">Message</b></td>
+		<td><textarea rows="5" cols="36" name="text"></textarea></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><i style="font-size:11px;">Messages must be between 5 and 2000 characters</i></td>
+	</tr>	
+	</table>
+</form>
+<br><br><br>
+<hr>
+<div class="post">
+<b style="color:#078400">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }}
+<br><br>
+<div class="post text">
+{{ thread.thread_text }}
+</div>
+</div>
+
+{% for reply in replies %}
+	<div class="post reply">
+	{{ reply.pub_date }} <a href="#{{ reply.id }}">No.{{ reply.id }}</a>
+	
+	<div class="post reply body">
+	{{ reply.post_text }}
+	</div>
+	</div>
+	<br>	
+{% endfor %}
+
+<hr>
+<div class="footer">
+Developed by <a href="https://Github.com/Astonex">Mark Winter</a> (astonex). Licensed under GPLv3
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+* {
+	margin: 0;
+}
+
+body {
+	background: #BEDEBC;
+	color: black;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	margin: 0 8px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #B7C5D9;
+	height: 0;
+	clear: left;
+}
+
+h1 {
+	font-family: tahoma;
+	letter-spacing: -2px;
+	font-size: 20pt;
+	margin: 0;
+	margin-top: 10px;
+	text-align: center;
+}
+
+h3 { 
+	text-align:center;
+}
+
+a, a:visited {
+	text-decoration: underline;
+	color: #34345C;
+}
+
+a:hover, p.intro a.post_no:hover {
+	color: #ff0000;
+}
+
+table {
+	margin: 0;
+}
+
+form {
+	margin-bottom: 4em;
+}
+
+form table {
+	margin: auto;
+}
+
+form table input {
+	height: auto;
+}
+
+form table tr td {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+form table.mod tr td {
+	padding: 2px;
+}
+
+form table tr th {
+	text-align: left;
+	padding: 4px;
+}
+
+form table tr th {
+	background: #98E;
+}
+
+form table tr td div {
+	text-align: center;
+	float: left;
+	padding-left: 3px;
+}
+
+form table tr td div input {
+	display: block;
+	margin: 2px auto 0 auto;
+}
+
+form table tr td div label {
+	font-size: 10px;
+}
+
+div {
+	display: block;
+}
+
+div.post {
+	max-width: 97%;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+div.post.text {
+	padding-left: 20px;
+}
+
+div.post.reply p {
+	margin: 0.3em 0 0 0;
+}
+
+div.post.reply div.body {
+	margin-left: 1.8em;
+	margin-top: 0.8em;
+	padding-right: 3em;
+	padding-bottom: 0.3em;
+}
+
+div.post.reply.highlighted {
+	background: #D6BAD0;
+}
+
+div.post.reply div.body a {
+	color: #D00;
+}
+
+div.post.reply {
+	max-width:97%;
+	background: #5E835C;	
+        margin: 0.2em 16px;	
+	padding-left:20px;
+	padding-right:20px;
+	display: inline-block;
+}
+
+div.post.reply.body {
+	display: block;	
+	padding-top:5px;
+}
+
+div.post.reply div.body span.spoiler a {
+	color: black;
+}
+
+div.footer {
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+}
