@@ -21,7 +21,7 @@ def index(request):
 	recentthreads = threads.order_by('-pub_date')[:15]
 
 	# Get top 5 comments for each of the last 15 created threads
-	replies = [0 for x in range(threads.count())]	
+	replies = [0 for x in range(recentthreads.count())]	
 	for i in range(0,threads.count()):
 		replies[i] = Post.objects.order_by('-pub_date').filter(thread=recentthreads[i])[:5]
 		
