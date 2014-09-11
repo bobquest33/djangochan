@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load board_extras %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,11 +48,13 @@
 </div>
 
 {% for reply in replies %}
-	<div class="post reply">
+	<div id="{{ reply.id }}" class="post reply">
 	{{ reply.pub_date }} <a href="#{{ reply.id }}">No.{{ reply.id }}</a>
 	
 	<div class="post reply body">
-	{{ reply.post_text }}
+	{% autoescape on %}
+	{{ reply.post_text|post_urlize }}
+	{% endautoescape %}
 	</div>
 	</div>
 	<br>	
@@ -59,7 +62,7 @@
 
 <hr>
 <div class="footer">
-Developed by <a href="https://Github.com/Astonex">Mark Winter</a> (astonex). Licensed under GPLv3
+Developed by <a href="https://Github.com/Astonex">Mark Winter</a> (astonex). Licensed under AGPLv3
 </div>
 
 </body>

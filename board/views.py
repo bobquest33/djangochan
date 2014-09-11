@@ -7,6 +7,7 @@ from django.core.context_processors import csrf
 from board.models import Thread, Post
 
 from random import randint
+import re
 
 # Create your views here.
 def index(request, page_number=None):
