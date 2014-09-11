@@ -52,9 +52,9 @@
 	{{ reply.pub_date }} <a href="#{{ reply.id }}">No.{{ reply.id }}</a>
 	
 	<div class="post reply body">
-	{% autoescape on %}
-	{{ reply.post_text|post_urlize }}
-	{% endautoescape %}
+
+	{{ reply.post_text }}
+
 	</div>
 	</div>
 	<br>	

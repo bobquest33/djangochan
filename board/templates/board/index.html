@@ -44,7 +44,9 @@
 			<a href="{% url 'thread' thread.id %}">[View Thread]</a>
 		<br><br>
 		<div class="post text">
+	
 		{{ thread.thread_text }}
+		
 		</div>
 		{% if thread.thread_count > 5 %}
 		<i style="font-size:11px;padding-left:14px">Total Replies: {{ thread.thread_count }}</i><br>
@@ -55,7 +57,9 @@
 			<div class="post reply">	
 				{{ reply.pub_date }} No.{{ reply.id }}
 				<div class="post reply body">
+				
 					{{ reply.post_text }}
+					
 				</div>
 			</div>
 			<br>

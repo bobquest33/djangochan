@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.context_processors import csrf
+from django.utils.html import conditional_escape
 
 from board.models import Thread, Post
 
@@ -82,6 +83,8 @@ def reply(request, thread_id):
 			b = request.POST['b']
 			value = request.POST['captcha']
 			if int(a) + int(b) == int(value or 0):
+				# Escape the html
+				text = conditional_escape(text)
 				post = Post(thread=thread, post_text=text)
 				post.save()
 				thread.thread_count += 1
