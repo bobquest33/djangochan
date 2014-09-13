@@ -11,11 +11,11 @@ I use nginx to forward connections to gunicorn as well as serve the static files
 ####To Be Done
   - Redesign entire css/html of the board
   - Images
-  - Thread pruning
 
 ###Implemented
   - Post creation
   - Thread creation
   - Thread bumping with a limit of 300 posts
   - Multiple pages to show all threads
-  - Admin backend to manage threads and posts
+  - Admin backend to manage threads and postsi
+  - Thread pruning can be done by running a cron job to execute 'python manage.py prunethreads'
