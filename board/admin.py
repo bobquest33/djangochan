@@ -14,7 +14,7 @@ class ThreadAdmin(admin.ModelAdmin):
 	]
 
 class PostAdmin(admin.ModelAdmin):
-	list_display = ('id', 'thread_id', 'post_text', 'pub_date')
+	list_display = ('id', 'post_text', 'pub_date')
 	search_fields = ['post_text']
 
 
