@@ -9,10 +9,13 @@ djangochan
 I use nginx to forward connections to gunicorn as well as serve the static files. I monitor gunicorn with supervisord. Using postgresql for the database 
 
 ####To Be Done
-
-  - Thread bumping
-  - Post linking
-  - Improve admin backend so that posts have a link to their thread and threads display posts
   - Redesign entire css/html of the board
-  - Images?
+  - Images
   - Thread pruning
+
+###Implemented
+  - Post creation
+  - Thread creation
+  - Thread bumping with a limit of 300 posts
+  - Multiple pages to show all threads
+  - Admin backend to manage threads and posts
