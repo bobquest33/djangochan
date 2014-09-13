@@ -3,12 +3,10 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.context_processors import csrf
-from django.utils.html import conditional_escape
 
 from board.models import Thread, Post
 
 from random import randint
-import re
 
 # Create your views here.
 def index(request, page_number=None):
@@ -83,10 +81,13 @@ def reply(request, thread_id):
 			b = request.POST['b']
 			value = request.POST['captcha']
 			if int(a) + int(b) == int(value or 0):
-				# Escape the html
-				text = conditional_escape(text)
 				post = Post(thread=thread, post_text=text)
 				post.save()
+
+				# Check if thread is at bump limit 
+				if thread.thread_count > 300:
+					thread.last_bumped.auto_now = False
+
 				thread.thread_count += 1
 				thread.save()
 
