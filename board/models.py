@@ -26,3 +26,10 @@ class Post(models.Model):
 	thread = models.ForeignKey(Thread)
 	post_text = models.CharField(max_length=2000)
 	pub_date = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+	def selflink(self):
+		if self.id:
+			return '<a href="/admin/board/post/%s">Edit</a>' % str(self.id)
+		else:
+			return 'Post not found'
+	selflink.allow_tags = True
