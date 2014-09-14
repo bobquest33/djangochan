@@ -10,4 +10,4 @@ class Command(BaseCommand):
 		if all_threads_count > 225:
 			# Delete all the threads which will delete posts in it as well
 			threads = Thread.objects.order_by('last_bumped')[225:].values_list("id", flat=True)
-			Thread.objects.exclude(pk__in=list(threads)).delete()
+			Thread.objects.filter(pk__in=list(threads)).delete()
