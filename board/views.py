@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.context_processors import csrf
+from django.utils.html import escape
 
 from board.models import Thread, Post
 
@@ -65,7 +66,7 @@ def create_thread(request):
 			a = request.POST['a']
 			b = request.POST['b']
 			value = request.POST['captcha']
-			if int(a) + int(b) == int(value or 0):		
+			if int(a) + int(b) == int(value or 0):	
 				thread = Thread(thread_title=title, thread_text=text)
 				thread.save()
 	
@@ -80,7 +81,7 @@ def reply(request, thread_id):
 			a = request.POST['a']
 			b = request.POST['b']
 			value = request.POST['captcha']
-			if int(a) + int(b) == int(value or 0):
+			if int(a) + int(b) == int(value or 0):	
 				post = Post(thread=thread, post_text=text)
 				post.save()
 

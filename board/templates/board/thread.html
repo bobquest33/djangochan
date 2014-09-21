@@ -24,16 +24,16 @@
 	<input type="hidden" name="b" value="{{ b }}">
 	<tr>
 		<td style="background:#424E49;text-align:center"><b style="color:#6FB699">{{ a }} + {{ b }} = ?</b></td>
-		<td><input type="text" name="captcha" siez="20">
+		<td style="background:none;"><input type="text" name="captcha" siez="20">
 			<input type="submit" value="Reply to Thread"></td>
 	</tr>
 	<tr>
 		<td style="background:#424E49;"><b style="color:#6FB699;">Message</b></td>
-		<td><textarea rows="5" cols="36" name="text"></textarea></td>
+		<td style="background:none;"><textarea rows="5" cols="36" name="text"></textarea></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><i style="font-size:11px;">Messages must be between 5 and 2000 characters</i></td>
+		<td style="background:none"></td>
+		<td style="background:none"><i style="font-size:11px;color:black">Messages must be between 5 and 2000 characters</i></td>
 	</tr>	
 	</table>
 </form>
@@ -41,9 +41,9 @@
 <hr>
 <div class="post">
 <b style="color:#078400">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }}
-<br><br>
 <div class="post text">
-{{ thread.thread_text }}
+{{ thread.thread_text|post_urlize }}
+<br><br>
 </div>
 </div>
 
@@ -59,7 +59,6 @@
 	</div>
 	<br>	
 {% endfor %}
-
 <hr>
 <div class="footer">
 Developed by <a href="https://Github.com/Astonex">Mark Winter</a> (astonex). Licensed under AGPLv3

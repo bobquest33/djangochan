@@ -48,14 +48,14 @@
 			</div>
 			<br>		
 			{% if thread.thread_count > 5 %}
-			<i style="font-size:11px;padding-left:14px">Total Replies: {{ thread.thread_count }}</i><br>
+			<i style="font-size:11px;padding-left:16px">Total Replies: {{ thread.thread_count }}</i><br>
 			{% endif %}
 		
 			{% for objects in replies %}	
 				{% if forloop.counter == forloop.parentloop.counter %}	
 					{% for reply in objects reversed %}		
 						<div class="post reply">	
-							{{ reply.pub_date }} No.{{ reply.id }}
+							{{ reply.pub_date }} <a href="/thread/{{ thread.id }}/#{{ reply.id }}">No.{{ reply.id }}</a>
 							<div class="post reply body">
 								{{ reply.post_text|post_urlize }}
 							</div>
