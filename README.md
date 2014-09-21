@@ -11,6 +11,8 @@ I use nginx to forward connections to gunicorn as well as serve the static files
 ####To Be Done
   - Redesign entire css/html of the board
   - Images
+  - Post linking
+  - Catalog view
 
 ###Implemented
   - Post creation
