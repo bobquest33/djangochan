@@ -29,7 +29,7 @@
 	</tr>
 	<tr>
 		<td style="background:#424E49;"><b style="color:#6FB699;">Message</b></td>
-		<td style="background:none;"><textarea rows="5" cols="36" name="text"></textarea></td>
+		<td style="background:none;"><textarea id="reply" rows="5" cols="36" name="text"></textarea></td>
 	</tr>
 	<tr>
 		<td style="background:none"></td>
@@ -49,7 +49,7 @@
 
 {% for reply in replies %}
 	<div id="{{ reply.id }}" class="post reply">
-	{{ reply.pub_date }} <a href="#{{ reply.id }}">No.{{ reply.id }}</a>
+	{{ reply.pub_date }} <a href="#{{ reply.id }}" onClick="quote('{{ reply.id }}')">No.{{ reply.id }}</a>
 	
 	<div class="post reply body">
 
@@ -63,6 +63,14 @@
 <div class="footer">
 Developed by <a href="https://Github.com/Astonex">Mark Winter</a> (astonex). Licensed under AGPLv3
 </div>
+
+<script type="text/javascript">
+function quote(id) {
+	var Field = document.getElementById('reply');
+	Field.value += '>>' + id;
+	
+}
+</script>
 
 </body>
 </html>
