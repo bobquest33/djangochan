@@ -3,8 +3,8 @@
 }
 
 body {
-	background: #BEDEBC;
-	color: black;
+	background:#1E1E1E;
+	color: #6B8F8F;
 	font-family: arial, helvetica, sans-serif;
 	font-size: 10pt;
 	margin: 0 8px;
@@ -15,8 +15,9 @@ body {
 hr {
 	border: none;
 	border-top: 1px solid #B7C5D9;
-	height: 0;
+	height: 0;	
 	clear: left;
+	padding-bottom: 20px;
 }
 
 h1 {
@@ -35,7 +36,7 @@ h3 {
 
 a, a:visited {
 	text-decoration: underline;
-	color: #34345C;
+	color: #FFFFFF;
 }
 
 a:hover {
@@ -62,15 +63,24 @@ table {
 }
 
 td {
-	background:#424E49;
+	background:#333333;
 	text-align:center;
-	color:#6FB699;
+	color:#6B8F8F;
+}
+
+img.post-image {
+	display: block;	
+	float: left;
+	margin: 0px 20px;
+	border: medium none;
+	padding-bottom:30px;
 }
 
 .post {
 	max-width: 97%;
 	padding-top: 10px;
 	padding-bottom: 5px;
+	margin-bottom: 20px;
 }
 
 .post.text {
@@ -79,8 +89,8 @@ td {
 }
 
 .post.reply {
-	max-width:97%;
-	background: #5E835C;	
+	max-width: 97%;
+	background: #333333;	
         margin-bottom: 5px;
 	margin-left: 20px;
 	padding-left: 10px;

@@ -4,51 +4,54 @@
 <html>
 
 	<head>
-		<title>Tox Feedback Board</title>
+		<title>DjangoChan Dev Board</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'board/style.css' %}" />
 	</head>
 
 	<body>
-		<h1>Tox Feedback Board</h1>
+		<h1>DjangoChan Dev Board</h1>
 
 		<h3>Create Thread</h3>
 
-		<form action="{% url 'create_thread' %}" method="post">
+		<form action="{% url 'create_thread' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			<table>
 				<input type="hidden" name="a" value="{{ a }}">
 				<input type="hidden" name="b" value="{{ b }}">
 				<tr>
-					<td>Title</td>
+					<td style="text-align:center;"><b>Title</b></td>
 					<td style="background:none;"><input type="text" name="title" size="20"></td>	
 				</tr>
 				<tr>
-					<td>{{ a }} + {{ b }} = ?</td>
+					<td><b>{{ a }} + {{ b }} = ?</b></td>
 					<td style="background:none;"><input type="text" name="captcha" size"20"><input type="submit" value="Create Thread"></td>
 				</tr>
 				<tr>
-					<td>Message</td>
+					<td style="text-align:center;"><b>Message</b></td>
 					<td style="background:none;"><textarea id="new_thread" rows="5" cols="36" name="text"></textarea></td>
 				</tr>
 				<tr>
+					<td style="text-align:center;"><b>Image</b></td>
+					<td><input type="file" accept="image/*" name="image"></td>
+				</tr>
+				<tr>
 					<td style="background:none;"></td>
-					<td style="background:none;"><i style="font-size:11px;color:black">Messages must be between 5 and 2000 characters</i></td>
+					<td style="background:none;font-size:11px;"><i>Messages must be between 5 and 2000 characters</i><br><i>You must upload an image with your thread</i><br><i>Image must be JPG, PNG or GIF. Max image size of 3mb</i></td>
 				</tr>
 			</table>	
 		</form>
 
-		<hr>
-
 {% if threads %}
 	{% for thread in threads %}	
 		<div class="post">	
-			<b style="color:#078400">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }} <a href="{% url 'thread' thread.id %}">[View Thread]</a>
+			<b style="color:#32DD6F">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }} <a href="{% url 'thread' thread.id %}">[View Thread]</a>
+			<img src="static/board/threadimages/{{ thread.id }}" width="250px" height="250px" class="post-image">
 			<div class="post text">
 				{{ thread.thread_text|post_urlize }}
 			</div>
 			<br>		
 			{% if thread.thread_count > 5 %}
-			<i style="font-size:11px;padding-left:16px">Total Replies: {{ thread.thread_count }}</i><br>
+			<i style="font-size:11px;padding-left:19px;">Total Replies: {{ thread.thread_count }}</i><br><br>
 			{% endif %}
 		
 			{% for objects in replies %}	
@@ -64,14 +67,12 @@
 					{% endfor %}
 				{% endif %}
 			{% endfor %} 		
-		</div>
-		<hr>
+		</div>	
+		<hr>	
 	{% endfor %}
 {% else %}
 	<p>No threads</p>
 {% endif %}
-
-	<br>
 	Pages: <a href="/">[ 0 ]</a> 
 	{% for i in pagecount|get_range %}
 		<a href="/{{ forloop.counter }}/">[ {{ forloop.counter }} ]</a> 

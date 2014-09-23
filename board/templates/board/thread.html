@@ -23,34 +23,39 @@
 	<input type="hidden" name="a" value="{{ a }}">
 	<input type="hidden" name="b" value="{{ b }}">
 	<tr>
-		<td style="background:#424E49;text-align:center"><b style="color:#6FB699">{{ a }} + {{ b }} = ?</b></td>
+		<td style="text-align:center"><b>{{ a }} + {{ b }} = ?</b></td>
 		<td style="background:none;"><input type="text" name="captcha" siez="20">
 			<input type="submit" value="Reply to Thread"></td>
 	</tr>
 	<tr>
-		<td style="background:#424E49;"><b style="color:#6FB699;">Message</b></td>
+		<td style="text-align:center"><b>Message</b></td>
 		<td style="background:none;"><textarea id="reply" rows="5" cols="36" name="text"></textarea></td>
 	</tr>
 	<tr>
+		<td><b>Image</b></td>
+		<td><input type="file" name="image" accept="image/*"></td>
+	</tr>
+	<tr>
 		<td style="background:none"></td>
-		<td style="background:none"><i style="font-size:11px;color:black">Messages must be between 5 and 2000 characters</i></td>
+		<td style="background:none;font-size:11px;"><i>Messages must be between 5 and 2000 characters</i><br><i>Images with replies are optional</i><br><i>Images must be JPG, PNG or GIF. Max image size of 3mb</i></td>
 	</tr>	
 	</table>
 </form>
 <br><br><br>
 <hr>
 <div class="post">
-<b style="color:#078400">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }}
-<div class="post text">
-{{ thread.thread_text|post_urlize }}
-<br><br>
-</div>
+	<b style="color:#078400">{{ thread.thread_title }}</b> {{ thread.pub_date }} No.{{ thread.id }}
+	<img src="/static/board/threadimages/{{ thread.id }}" class="post-image" width="250px" height="250px">
+	<div class="post text">
+		{{ thread.thread_text|post_urlize }}
+		<br><br>
+	</div>
 </div>
 
 {% for reply in replies %}
 	<div id="{{ reply.id }}" class="post reply">
 	{{ reply.pub_date }} <a href="#{{ reply.id }}" onClick="quote('{{ reply.id }}')">No.{{ reply.id }}</a>
-	
+	<img src="static/board/threadimages/{{ thread.id }}" width="250px" height="25px">
 	<div class="post reply body">
 
 	{{ reply.post_text|post_urlize }}

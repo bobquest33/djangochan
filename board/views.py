@@ -30,7 +30,7 @@ def index(request, page_number=None):
 		recentthreads = threads.order_by('-last_bumped')[:15]
 
 	# Get last 5 comments for each of the last 15 created threads
-	replies = [0 for x in range(recentthreads.count())]	
+	replies = [0 for x in range(recentthreads.count())]
 	for i in range(0,recentthreads.count()):
 		replies[i] = Post.objects.order_by('-pub_date').filter(thread=recentthreads[i])[:5]
 		
@@ -67,8 +67,13 @@ def create_thread(request):
 			b = request.POST['b']
 			value = request.POST['captcha']
 			if int(a) + int(b) == int(value or 0):	
-				thread = Thread(thread_title=title, thread_text=text)
-				thread.save()
+				# Was file uploaded and under 3mb and image file
+				image = request.FILES['image']
+				if image and image.size < 3000000 and check_image_type(image):
+					thread = Thread(thread_title=title, thread_text=text)
+					thread.save()
+					# Use thread id as image name
+					handle_upload(image, thread.id)
 	
 		return HttpResponseRedirect(reverse('index')) 
 
@@ -93,3 +98,15 @@ def reply(request, thread_id):
 				thread.save()
 
 	return HttpResponseRedirect(reverse('thread', args=(thread.id,)))
+
+def handle_upload(file, id):
+	with open('/opt/chan/static/board/threadimages/' + str(id), 'wb+') as destination:
+        	for chunk in file.chunks():
+            		destination.write(chunk)
+
+def check_image_type(image):
+	type = image.content_type
+	if type == "image/gif" or "image/jpeg" or "image/png":
+		return True
+	else:
+		return False
